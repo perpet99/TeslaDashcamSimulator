@@ -101,8 +101,17 @@ namespace TSimulater
                 AddLog($"write file {dest}");
 
 
+                try
+                {
+                    await CopyFilesAsync(item.Value, dest);
+                }
+                catch (Exception ex)
+                {
 
-                await CopyFilesAsync(item.Value,dest);
+                    AddLog(ex.Message);
+
+                }
+                
             }
 
             AddLog("end write recentclips");
@@ -117,10 +126,12 @@ namespace TSimulater
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            fileList.Add("front", "sample.mp4");
-            fileList.Add("back", "sample.mp4");
-            fileList.Add("left_repeater", "sample.mp4");
-            fileList.Add("right_repeater", "sample.mp4");
+            var file = "sample.mp4";
+
+            fileList.Add("front", file);
+            fileList.Add("back", file);
+            fileList.Add("left_repeater", file);
+            fileList.Add("right_repeater", file);
         }
 
         private void sentryBtn_Click(object sender, EventArgs e)
